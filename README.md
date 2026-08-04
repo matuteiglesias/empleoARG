@@ -41,6 +41,16 @@ Para reconstruir la extracción, abrir `Descargador de Datos Oficiales.ipynb` y 
 - las claves de serie sigan representando los mismos indicadores;
 - las dependencias `pandas`, `requests` y `openpyxl` sean compatibles.
 
+## Verificación de frescura
+
+[`DATA_STATUS.json`](DATA_STATUS.json) declara el corte del snapshot y separa una actualización de datos de un push cualquiera al repositorio.
+
+```bash
+python scripts/verify_snapshot.py
+```
+
+Este chequeo confirma que `datos/45.2_ECTDT.csv` sigue terminando en el período declarado. No descarga la fuente ni demuestra que el notebook todavía pueda ejecutarse. No se identificó automatización versionada dentro del repositorio.
+
 ## Autoridad y límites
 
 Este repositorio posee el **snapshot procesado y la lógica histórica de extracción**. No es la publicación oficial ni garantiza que los valores reflejen la última edición del apéndice.
