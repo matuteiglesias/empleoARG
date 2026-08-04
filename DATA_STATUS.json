@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-08-04",
+  "artifact": "datos/45.2_ECTDT.csv",
+  "artifact_max_period": "2023-01-01",
+  "last_substantive_data_update": {
+    "commit": "e77ef2fd9894aa6ac60e799b6ec028e2f9e496be",
+    "committed_at": "2023-08-17"
+  },
+  "automation": {
+    "configured_in_repository": false,
+    "last_successful_run": "unknown"
+  },
+  "classification": "stale-versioned-snapshot",
+  "failure_policy": "Do not describe the series as current. A later repository push is not a data update unless the artifact cutoff changes."
+}
