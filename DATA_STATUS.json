@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "audited_at": "2026-08-04",
+  "schema_version": 2,
+  "audited_at": "2026-09-29",
   "artifact": "datos/45.2_ECTDT.csv",
   "artifact_max_period": "2023-01-01",
   "last_substantive_data_update": {
@@ -12,5 +12,12 @@
     "last_successful_run": "unknown"
   },
   "classification": "stale-versioned-snapshot",
-  "failure_policy": "Do not describe the series as current. A later repository push is not a data update unless the artifact cutoff changes."
+  "canonical_product": {
+    "contract": "publicdata.indec-eph-labor-state/v1",
+    "implementation_status": "c1-adapter-ready",
+    "real_release_status": "pending-L1",
+    "required_coverage": "2017-Q1..2026-Q2",
+    "failure_policy": "Do not claim a current real-data release until L1 fetches official INDEC workbooks, records hashes, validates layout and passes the required coverage gate."
+  },
+  "failure_policy": "Do not describe the legacy CSV series as current. A later repository push is not a data update unless the artifact cutoff or a separately manifested canonical release changes."
 }
