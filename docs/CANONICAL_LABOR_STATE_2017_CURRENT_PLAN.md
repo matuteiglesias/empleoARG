@@ -24,7 +24,7 @@ Primary evidence already verified during planning:
 - Current `Mercado de trabajo. Tasas e indicadores socioeconómicos (EPH)` releases publish total-31-agglomerates, six-region and agglomerate tables.
 - As of 2026-09-29, the latest labor measurement is 2026-Q2; the EPH microdata surface is only through 2026-Q1.
 - INDEC publishes CV / 90% confidence-interval files for principal labor indicators from 2022-Q4 onward.
-- EPH 2020-Q2 is an exceptional COVID fieldwork quarter; 2024-Q1 and 2024-Q2 are separate regime-transition/recession shock quarters for this research program. All three must remain explicitly marked rather than silently normalized away.
+- EPH 2020-Q2 is an exceptional COVID fieldwork quarter; 2024-Q1 and 2024-Q2 are separate 2024-H1 macroeconomic shock quarters for this research program. All three must remain explicitly marked rather than silently normalized away.
 
 Prefer machine-readable official XLS/XLSX downloads. PDF tables are evidence/fallback, not the preferred ingestion surface.
 
@@ -135,8 +135,8 @@ Preserve all official observations exactly. Add explicit research metadata for:
 
 ```text
 2020-Q2  pandemic_fieldwork_regime
-2024-Q1  regime_transition_shock
-2024-Q2  regime_transition_shock
+2024-Q1  2024_h1_macroeconomic_shock
+2024-Q2  2024_h1_macroeconomic_shock
 ```
 
 These flags are metadata for downstream structural modeling. They do not modify, smooth, replace or reinterpret the official published labor values.
