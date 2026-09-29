@@ -24,7 +24,7 @@ Primary evidence already verified during planning:
 - Current `Mercado de trabajo. Tasas e indicadores socioeconómicos (EPH)` releases publish total-31-agglomerates, six-region and agglomerate tables.
 - As of 2026-09-29, the latest labor measurement is 2026-Q2; the EPH microdata surface is only through 2026-Q1.
 - INDEC publishes CV / 90% confidence-interval files for principal labor indicators from 2022-Q4 onward.
-- EPH 2020-Q2 is an exceptional COVID fieldwork quarter and must remain explicitly marked rather than silently normalized away.
+- EPH 2020-Q2 is an exceptional COVID fieldwork quarter; 2024-Q1 and 2024-Q2 are separate regime-transition/recession shock quarters for this research program. All three must remain explicitly marked rather than silently normalized away.
 
 Prefer machine-readable official XLS/XLSX downloads. PDF tables are evidence/fallback, not the preferred ingestion surface.
 
@@ -129,15 +129,17 @@ The release must emit a coverage ledger over every expected period × required g
 
 No forward/back fill. Missing official observations remain missing with explicit status.
 
-## 2020-Q2
+## Exceptional shock periods
 
-Preserve 2020-Q2 as an actual observed historical labor state and add an explicit exception flag such as:
+Preserve all official observations exactly. Add explicit research metadata for:
 
 ```text
-pandemic_fieldwork_regime
+2020-Q2  pandemic_fieldwork_regime
+2024-Q1  regime_transition_shock
+2024-Q2  regime_transition_shock
 ```
 
-This flag is metadata. Do not alter the published value.
+These flags are metadata for downstream structural modeling. They do not modify, smooth, replace or reinterpret the official published labor values.
 
 ## Repository boundary
 
@@ -168,7 +170,7 @@ Deliver:
 4. normalized artifact writer + manifest/checksums;
 5. coverage and duplicate-cell validators;
 6. quality/CV/CI attachment where source-backed;
-7. 2020-Q2 exception metadata;
+7. exceptional-period metadata for 2020-Q2 and 2024-Q1/Q2;
 8. fixture tests and synthetic drift/failure tests;
 9. `SYSTEM.yaml`, README and command surface;
 10. a network-independent test suite.
@@ -205,7 +207,7 @@ Required receipt:
 - core indicator coverage;
 - latest period = 2026-Q2;
 - any source revisions/schema transitions;
-- 2020-Q2 flagged;
+- 2020-Q2 and 2024-Q1/Q2 flagged with distinct exception reasons;
 - CV/CI availability beginning at the actual source boundary;
 - comparison against the old committed series on overlapping periods, with differences explained rather than overwritten.
 
