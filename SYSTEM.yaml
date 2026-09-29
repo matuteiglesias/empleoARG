@@ -1,0 +1,28 @@
+system:
+  name: empleoARG
+  authority: official INDEC EPH labor-market aggregate state
+  canonical_artifact: publicdata.indec-eph-labor-state/v1
+
+owns:
+  - official INDEC labor-series source acquisition and immutable source snapshots
+  - normalized quarterly labor observations by total-31, region, and supported agglomerate
+  - stable labor indicator and geography identities
+  - source lineage, cell identity, checksums, quality metadata, and coverage QA
+  - explicit exceptional-period metadata that does not alter official values
+
+does_not_own:
+  - EPH person microdata
+  - person-level employment or CONDACT imputation
+  - Census transport or calibration
+  - KL or latent person-state calibration
+  - income, welfare, or poverty estimation
+
+historical_evidence:
+  - datos/45.2_ECTDT.csv
+  - datos/42.3_EPH_PUNTUA.csv
+policy:
+  overwrite_historical_snapshots: false
+  forward_fill: false
+  backward_fill: false
+  synthesize_quality: false
+  network_tests: false
