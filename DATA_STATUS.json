@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-09-29",
+  "audited_at": "2026-09-30",
   "artifact": "datos/45.2_ECTDT.csv",
   "artifact_max_period": "2023-01-01",
   "last_substantive_data_update": {
@@ -14,10 +14,22 @@
   "classification": "stale-versioned-snapshot",
   "canonical_product": {
     "contract": "publicdata.indec-eph-labor-state/v1",
-    "implementation_status": "c1-adapter-ready",
-    "real_release_status": "pending-L1",
+    "implementation_status": "real-source-topology-proven",
+    "real_release_status": "materialized-official-gap-preserved",
+    "release_id": "indec-eph-labor-state-52ca6bcb586f2b0b",
     "required_coverage": "2017-Q1..2026-Q2",
-    "failure_policy": "Do not claim a current real-data release until L1 fetches official INDEC workbooks, records hashes, validates layout and passes the required coverage gate."
+    "required_cells": 1064,
+    "observed_required_cells": 1060,
+    "missing_required_cells": [
+      "2019-Q3/noreste/activity_rate",
+      "2019-Q3/noreste/employment_rate",
+      "2019-Q3/noreste/unemployment_rate",
+      "2019-Q3/noreste/subemployment_rate"
+    ],
+    "completion_contract": "research.indec-eph-labor-context-completion/v1",
+    "centerline_completion_release": "indec-eph-labor-context-completion-backward_fill-2212ec7a74aa7f16",
+    "sensitivity_completion_release": "indec-eph-labor-context-completion-forward_fill-71229ee29569dc24",
+    "failure_policy": "Official missing cells remain missing in the official product. Model-ready completion is allowed only through an explicit separately manifested bounded overlay."
   },
-  "failure_policy": "Do not describe the legacy CSV series as current. A later repository push is not a data update unless the artifact cutoff or a separately manifested canonical release changes."
+  "failure_policy": "Do not describe the legacy CSV series as current. Do not relabel completion-overlay values as official INDEC observations."
 }
