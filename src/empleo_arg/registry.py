@@ -23,7 +23,7 @@ GEOGRAPHIES: tuple[Geography, ...] = (
     Geography("region", "noreste", "Noreste", ("noreste", "noreste argentino", "nea", "region noreste")),
     Geography("region", "noroeste", "Noroeste", ("noroeste", "noroeste argentino", "noa", "region noroeste")),
     Geography("region", "pampeana", "Pampeana", ("pampeana", "region pampeana")),
-    Geography("region", "patagonia", "Patagonia", ("patagonia", "region patagonia")),
+    Geography("region", "patagonia", "Patagonia", ("patagonia", "patagonica", "region patagonia")),
     Geography("agglomerate", "gran_la_plata", "Gran La Plata", ("gran la plata",), "02"),
     Geography("agglomerate", "bahia_blanca_cerri", "Bahía Blanca-Cerri", ("bahia blanca cerri", "bahia blanca - cerri"), "03"),
     Geography("agglomerate", "gran_rosario", "Gran Rosario", ("gran rosario",), "04"),
