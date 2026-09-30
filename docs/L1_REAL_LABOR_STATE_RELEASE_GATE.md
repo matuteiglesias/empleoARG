@@ -1,6 +1,6 @@
 # L1 — real canonical labor-state release gate
 
-Status: local-data execution packet, 2026-09-29.
+Status: executed real-data gate, 2026-09-30. Official release `indec-eph-labor-state-52ca6bcb586f2b0b` materialized with 1060/1064 required official cells; the documented 2019-Q3 NEA gap is preserved and model completion is handled separately by L1B.
 
 ## Purpose
 
