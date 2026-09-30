@@ -12,6 +12,7 @@ from .parser import parse_quality_workbook, parse_rate_workbook
 from .release import read_release_observations, verify_release_files, write_release
 from .sources import SOURCE_CATALOG, fetch_source, load_snapshot
 from .validation import apply_exception_flags, assert_required_coverage, attach_quality, coverage_ledger, validate_observations
+from .completion import write_completion_overlay
 
 
 def _parse_release_rows(release_dir: Path) -> list[Observation]:
@@ -80,6 +81,14 @@ def cmd_coverage(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_complete(args: argparse.Namespace) -> int:
+    release = write_completion_overlay(
+        Path(args.official_release), Path(args.output_root), method=args.method
+    )
+    print(release)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="empleo-arg")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -94,6 +103,11 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("release"); s.add_argument("--require-full-coverage", action="store_true"); s.set_defaults(func=cmd_validate)
     s = sub.add_parser("coverage", help="emit 2017-Q1..2026-Q2 required coverage ledger")
     s.add_argument("release"); s.set_defaults(func=cmd_coverage)
+    s = sub.add_parser("complete", help="create a bounded model-use completion overlay")
+    s.add_argument("--official-release", required=True)
+    s.add_argument("--output-root", required=True)
+    s.add_argument("--method", choices=("backward_fill", "forward_fill"), default="backward_fill")
+    s.set_defaults(func=cmd_complete)
     return parser
 
 
