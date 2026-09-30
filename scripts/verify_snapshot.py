@@ -29,8 +29,8 @@ with artifact.open(newline="", encoding="utf-8") as handle:
 
 if not header or not rows:
     fail("artifact is empty")
-if any(len(row) != len(header) + 1 for row in rows):
-    fail("row width does not match one date index plus the named series columns")
+if any(len(row) != len(header) for row in rows):
+    fail("row width does not match the named period field and series columns")
 
 periods = []
 for row in rows:
@@ -51,7 +51,7 @@ print(
         {
             "artifact": status["artifact"],
             "rows": len(rows),
-            "series_columns": len(header),
+            "series_columns": len(header) - 1,
             "first_period": min(periods).isoformat(),
             "artifact_max_period": actual_max,
             "automation_configured_in_repository": status["automation"]["configured_in_repository"],
