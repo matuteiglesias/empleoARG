@@ -9,6 +9,7 @@ owns:
   - stable labor indicator and geography identities
   - source lineage, cell identity, checksums, quality metadata, and coverage QA
   - explicit exceptional-period metadata that does not alter official values
+  - bounded model-input completion overlays that preserve official missingness and record explicit fill provenance
 
 does_not_own:
   - EPH person microdata
@@ -20,9 +21,24 @@ does_not_own:
 historical_evidence:
   - datos/45.2_ECTDT.csv
   - datos/42.3_EPH_PUNTUA.csv
+interfaces:
+  produces:
+  - artifact:publicdata.indec-eph-labor-state/v1
+  - artifact:research.indec-eph-labor-context-completion/v1
+
+verification:
+  status: real-l1-materialized-with-explicit-bounded-completion
+  last_verified: '2026-09-30'
+  evidence:
+  - official release indec-eph-labor-state-52ca6bcb586f2b0b covers 1060 of 1064 required model-critical cells for 2017-Q1..2026-Q2
+  - the only required official gap is noreste 2019-Q3 across activity, employment, unemployment and subemployment
+  - backward-fill and forward-fill one-quarter completion overlays are separate derived artifacts and never mutate the official parent
+  - real workbook topology, source hashes, schema transitions and immutable release checks are governed by the production CLI
+
 policy:
   overwrite_historical_snapshots: false
-  forward_fill: false
-  backward_fill: false
+  official_product_forward_fill: false
+  official_product_backward_fill: false
+  derived_completion_overlay: bounded_explicit_only
   synthesize_quality: false
   network_tests: false
