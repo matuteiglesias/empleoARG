@@ -53,3 +53,24 @@ def test_unknown_layout_fails_closed(tmp_path: Path):
     p = tmp_path / "drift.xlsx"; wb = Workbook(); wb.save(p)
     with pytest.raises(SchemaDriftError):
         parse_rate_workbook(p, snap(p, layout="unknown_layout"))
+
+
+def test_parse_wide_official_quarter_matrix(tmp_path: Path):
+    p = tmp_path / "wide.xlsx"
+    wb = Workbook(); ws = wb.active; ws.title = "Cuadro 1.1"
+    ws.append(["Principales indicadores"])
+    ws.append([None, "Total 31 aglomerados urbanos"])
+    ws.append([None, "Año 2026", None, None])
+    ws.append([None, "1° trimestre", "2° trimestre", None])
+    ws.append([])
+    ws.append(["Actividad", 48.0, 49.0])
+    ws.append(["Empleo", 44.0, 45.0])
+    ws.append(["Desocupación abierta", 8.0, 7.9])
+    ws.append(["Subocupación", 11.0, 11.5])
+    wb.save(p)
+    obs = parse_rate_workbook(p, snap(p))
+    assert len(obs) == 8
+    assert {o.period for o in obs} == {"2026-Q1", "2026-Q2"}
+    assert {o.indicator_id for o in obs} == {
+        "activity_rate", "employment_rate", "unemployment_rate", "subemployment_rate"
+    }
