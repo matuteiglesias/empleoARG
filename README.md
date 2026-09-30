@@ -1,6 +1,6 @@
 # Empleo Argentina — estado laboral oficial EPH
 
-`empleoARG` is being revived as the governed public-data authority for **official INDEC EPH labor-market state by quarter and geography**. The canonical contract is:
+`empleoARG` is the governed public-data authority for **official INDEC EPH labor-market state by quarter and geography**. The canonical contract is:
 
 ```text
 publicdata.indec-eph-labor-state/v1
@@ -44,7 +44,24 @@ It separates explicit layouts instead of silently adapting column positions:
 - current `Mercado de trabajo. Tasas e indicadores socioeconómicos (EPH)` companion XLS;
 - source-backed CV / 90% confidence-interval XLSX, documented by INDEC from 2022-Q4 onward.
 
-The 2026-Q2 endpoint descriptors are pinned in the catalog, but a real release is **not** claimed by this code change. The L1 gate must fetch and validate the live binaries, source hashes, schema, and complete 2017-Q1..2026-Q2 coverage.
+## Current real state
+
+The real L1 source acquisition/materialization has been completed for `2017-Q1..2026-Q2`.
+
+- Official release: `indec-eph-labor-state-52ca6bcb586f2b0b`.
+- Required model-critical grid: 1,064 cells.
+- Officially observed: 1,060 cells.
+- Genuine official gap: the four principal NEA indicators in `2019-Q3`, when Gran Resistencia was excluded from EPH fieldwork.
+- The official release remains immutable and truthfully incomplete.
+
+Model-ready completion is a **separate derived contract**, never a rewrite of the official product:
+
+- centerline bounded backward-fill overlay: `indec-eph-labor-context-completion-backward_fill-2212ec7a74aa7f16`;
+- forward-fill sensitivity overlay: `indec-eph-labor-context-completion-forward_fill-71229ee29569dc24`.
+
+Both overlays are restricted to the documented one-quarter NEA gap and carry explicit parent/fill provenance. No CV/CI or source quality metadata is fabricated.
+
+The 2026-Q2 endpoint descriptors remain pinned in the catalog and the real source topology is now covered by the production parser.
 
 ## Commands
 
@@ -83,7 +100,7 @@ pytest -q
 python scripts/verify_snapshot.py
 ```
 
-Tests synthesize workbook fixtures locally and cover known layouts, source URL policy, duplicate cells, coverage gaps, exceptional metadata, immutable release checksums, and drift failures.
+Tests synthesize workbook fixtures locally and cover known layouts, source URL policy, duplicate cells, coverage gaps, exceptional metadata, immutable release checksums, bounded completion overlays, and drift failures.
 
 ## Historical snapshot
 
